@@ -1,3 +1,8 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>DCA Pernambuco 2019–2025</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -40,7 +45,10 @@
 }
 
 * { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { color-scheme: light; }
 body {
+  margin: 0;
   background: var(--bg);
   color: var(--ink);
   font-family: var(--font-body);
@@ -230,6 +238,8 @@ tbody tr:hover td { background: var(--accent-soft); }
   .chart .bar { transition: fill 120ms ease; }
 }
 </style>
+</head>
+<body>
 
 <div class="wrap">
   <header>
@@ -368,7 +378,7 @@ function renderSummary() {
 }
 
 function renderChart() {
-  const W = 420, H = 220, left = 44, right = 8, top = 16, bottom = 28;
+  const W = 420, H = 220, left = 44, right = 8, top = 28, bottom = 28;
   const vals = ANOS.map((a) => totais(a).bruta);
   const max = Math.ceil(Math.max(...vals) / 1e10) * 1e10;
   const step = max / 4;
@@ -381,7 +391,7 @@ function renderChart() {
     s += `<line class="grid" x1="${left}" x2="${W - right}" y1="${y(v)}" y2="${y(v)}"/>`;
     s += `<text x="${left - 6}" y="${y(v) + 4}" text-anchor="end">${(v / 1e9).toLocaleString("pt-BR")}</text>`;
   }
-  s += `<text x="${left - 6}" y="${top - 4}" text-anchor="end">R$ bi</text>`;
+  s += `<text x="${left - 6}" y="${top - 14}" text-anchor="end">R$ bi</text>`;
   ANOS.forEach((a, i) => {
     const v = vals[i];
     const x = left + i * bw + bw * 0.18;
@@ -455,3 +465,5 @@ $("busca").addEventListener("input", renderTable);
 const hash = location.hash.replace("#", "");
 selecionar(DATA.anos[hash] ? hash : anoAtual);
 </script>
+</body>
+</html>
